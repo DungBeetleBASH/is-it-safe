@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+export const handlers: Alexa.Handlers = {
     'LaunchRequest': function () {
         this.attributes.speechOutput = this.t('LAUNCH_MESSAGE');
         this.attributes.repromptSpeech = this.t('LAUNCH_MESSAGE');
@@ -20,7 +18,7 @@ module.exports = {
     'AMAZON.CancelIntent': function () {
         this.emit('SessionEndedRequest');
     },
-    'SessionEndedRequest':function () {
+    'SessionEndedRequest': function () {
         this.emit(':tell', this.t('STOP_MESSAGE'));
     },
     'Respond': function () {
@@ -29,4 +27,4 @@ module.exports = {
     'Unhandled': function () {
         this.emitWithState('AMAZON.HelpIntent');
     }
-};
+}
