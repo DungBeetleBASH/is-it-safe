@@ -22,9 +22,12 @@
     "aws-sdk": "^2.81.0"
   },
   "devDependencies": {
+    "@types/alexa-sdk": "^1.0.10",
     "chai": "^4.1.0",
     "eslint": "^4.2.0",
     "mocha": "^3.4.2",
-    "sinon": "^2.3.8"
+    "sinon": "^2.3.8",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
   }
 }

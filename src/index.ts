@@ -1,10 +1,10 @@
 'use strict';
-const AWS = require('aws-sdk');
+import * as AWS from 'aws-sdk';
 AWS.config.update({region:'eu-west-1'});
-const Alexa = require('alexa-sdk');
-const language = require('./language.json');
+import * as Alexa from 'alexa-sdk';
+import * as language from './language.json';
+import * as handlers from './handlers';
 const APP_ID = process.env.APP_ID;
-const handlers = require('./handlers')(etty);
 
 exports.handler = function (event, context) {
     const alexa = Alexa.handler(event, context);
