@@ -1,0 +1,30 @@
+{
+  "name": "is-it-safe",
+  "version": "1.0.0",
+  "description": "AWS Lambda function for is-it-safe",
+  "repository": "https://github.com/DungBeetleBASH/is-it-safe",
+  "main": "index.js",
+  "scripts": {
+    "mocha": "mocha '**.test.js'",
+    "lint": "eslint ./",
+    "test": "npm run lint && npm run mocha",
+    "install_prod": "npm --prefix ./src install ./src --production",
+    "clean": "rm -rf deploy 2> /dev/null && mkdir deploy",
+    "zip": "cd src; zip -r ../deploy/is-it-safe_${TRAVIS_BRANCH}_${TRAVIS_BUILD_NUMBER}.zip is-it-safe.dynamo.js handlers.js index.js language.json node_modules",
+    "deploy": "npm run clean && npm run zip",
+    "build": "npm test && npm run install_prod && npm run deploy"
+  },
+  "keywords": [],
+  "author": "DungBeetleBASH",
+  "license": "MIT",
+  "dependencies": {
+    "alexa-sdk": "^1.0.11",
+    "aws-sdk": "^2.81.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "eslint": "^4.2.0",
+    "mocha": "^3.4.2",
+    "sinon": "^2.3.8"
+  }
+}

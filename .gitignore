@@ -1,0 +1,8 @@
+node_modules
+src/node_modules
+*.sublime-*
+npm-debug.log
+.idea
+*.iml
+*.zip
+deploy

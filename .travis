@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- 7.7
+
+script:
+- npm run build
+
+deploy:
+  skip_cleanup: true
+  provider: s3
+  access_key_id: AKIAIRM7LDU3IDN3NGQQ
+  secret_access_key:
+    secure: QomPhMv1wAuU0b1Fd7BQ+JcQeZYqeKOmc5QFZMkK1xI6JfIEcqhelz2Jj3YQpLiC/mkz4EG0b+mFmoY3WPpcszda9IQlsENJBgGB0rttsEmc1OZWXdXZeWhjHcNp0Ek1zg5S5QWRN2CajKTthDYAC9goNjAiTlxiJig3MRRLsElLyw9Sf3tT/KgnHvJ3PDQQnCZh9JHBY3gxMwDMhpCVBTz7HdixmF9vv6hJtaADfjphRNxUH0Ycbwq2JxQPVU+W9pIPQ5W+LUQ6M856+3yhmPtck/T/htz7qubCXVB9fDV1aoTtriBABWb85x8rhKdvpPMI9xz/BtebPqstIwNGr3Lq7Dq6/9s+UcD/6Tm532/72FSzPV/+xuw+UX/Bo6UUdDyWLbqY+lfu4J5AIKb5PLLfnd6PozFAKkxG4NH41KOnCfLjmwjqUE5JXeIefcxD2TqqtRMJF1dAvwUcC59fN5EJsHMnNDaKMNUNn5PDwoz7acSkX3MoXgUAuyyOZ5EYiet1R4Cmsr48ogy/1DJpYBfsDte9Gn93c+eMZUEUApl9j1E/AvyWfHF67xFsDlMmTJazUdZ3IFBjyZHhVDL9qiAl2uwodKD0MjhWV/s3jodF6+uMZ99JfITHvdcswu0o+4PpUg1O4MRQfrrzySMcJwv+12cTdFV7BA/I8csHdZo=
+  bucket: dung-beetle-bash-travis-builds
+  local-dir: deploy
+  upload-dir: is-it-safe
+  acl: authenticated_read
+  on:
+    repo: DungBeetleBASH/is-it-safe
+
