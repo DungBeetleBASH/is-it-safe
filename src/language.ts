@@ -1,4 +1,12 @@
-export const Language: any = {
+interface ILang {
+    [l: string]: {
+        translation: {
+            [key: string]: string
+        }
+    };
+}
+
+export const Language: ILang = {
     en: {
         translation: {
             SKILL_NAME: 'Is it safe?',
@@ -9,4 +17,4 @@ export const Language: any = {
             STOP_MESSAGE: 'Goodbye.'
         }
     }
-}
+};

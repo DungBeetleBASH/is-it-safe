@@ -1,30 +1,40 @@
-export const handlers: Alexa.Handlers = {
-    'LaunchRequest': function () {
+import * as Alexa from 'alexa-sdk';
+
+export const handlers: Alexa.Handlers<Alexa.Request> = {
+
+    'LaunchRequest': () => {
         this.attributes.speechOutput = this.t('LAUNCH_MESSAGE');
         this.attributes.repromptSpeech = this.t('LAUNCH_MESSAGE');
         this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
-    'AMAZON.HelpIntent': function () {
+
+    'AMAZON.HelpIntent': () => {
         this.attributes.speechOutput = this.t('HELP_MESSAGE');
         this.attributes.repromptSpeech = this.t('HELP_REPROMPT');
         this.emitWithState('Respond');
     },
-    'AMAZON.RepeatIntent': function () {
+
+    'AMAZON.RepeatIntent': () => {
         this.emitWithState('Respond');
     },
-    'AMAZON.StopIntent': function () {
+
+    'AMAZON.StopIntent': () => {
         this.emit('SessionEndedRequest');
     },
-    'AMAZON.CancelIntent': function () {
+
+    'AMAZON.CancelIntent': () => {
         this.emit('SessionEndedRequest');
     },
-    'SessionEndedRequest': function () {
+
+    'SessionEndedRequest': () => {
         this.emit(':tell', this.t('STOP_MESSAGE'));
     },
-    'Respond': function () {
+
+    'Respond': () => {
         this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
-    'Unhandled': function () {
+
+    'Unhandled': () => {
         this.emitWithState('AMAZON.HelpIntent');
     }
-}
+};

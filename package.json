@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/alexa-sdk": "^1.0.10",
-    "@types/node": "^8.0.34",
+    "@types/node": "^8.0.39",
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
     "sinon": "^2.3.8",

@@ -1,21 +1,21 @@
 /*global describe, it, beforeEach, afterEach */
-const assert = require('chai').assert;
-const sinon = require('sinon');
+import assert from 'chai';
+import * as sinon from 'sinon';
 
-describe('index', function() {
+/*describe('index', () => {
 
-    beforeEach(function() {
+    beforeEach(() => {
     });
 
-    afterEach(function() {
+    afterEach(() => {
     });
 
-    describe('', function() {
+    describe('', () => {
 
-        it('', function(done) {
+        it('', (done) => {
             done();
         });
 
     });
 
-});
+});*/
