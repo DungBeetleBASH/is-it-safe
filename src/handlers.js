@@ -43,18 +43,37 @@ module.exports = {
     },
 
     'GetPoliceData': function() {
-        let self = this;
-        
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
             if (err) {
-                return self.emitWithState('LocationError');
+                return this.emitWithState('LocationError');
             }
-            // eslint-disable-next-line no-console
-            console.log('crimeData', crimeData);
-            this.attributes.speechOutput = 'temp message';
+            this.attributes.speechOutput = this.GeneratePoliceOutput(crimeData);
             this.attributes.repromptSpeech = 'temp message';
-            this.emitWithState('Respond');
+            this.emitWithState('RespondAndClose');
         });
+    },
+
+    'GeneratePoliceOutput': function(crimeData) {
+        let output = '';
+        if (crimeData.total > 10) {
+            output += this.t('OMG');
+        }
+        if (crimeData.total === 1) {
+            output += this.t('TOTAL_CRIME');
+        } else {
+            output += this.t('TOTAL_CRIMES').replace('{num}', String(crimeData.total));
+        }
+        if (crimeData.total > 0) {
+            output += '<break time="0.5s"/>';
+            output += this.t('OF_WHICH');
+            crimeData.crimeCategories.forEach(category => {
+                let count = crimeData.crimeIncidents[category];
+                output += '<break time="0.5s"/>' + String(count);
+                output += (count === 1) ? this.t('WAS') : this.t('WERE');
+                output += ' ' + category.replace('-', ' ');
+            });
+        }
+        return output;
     },
 
     'AMAZON.HelpIntent': function() {

@@ -8,6 +8,7 @@ const street = '/crimes-street/all-crime?';
 function makeResponse(crimes) {
     let crimeIncidents = {};
     let crimeCategories = [];
+    let total = 0;
     crimes.forEach(crime => {
         if (crimeIncidents[crime.category] !== undefined) {
             crimeIncidents[crime.category]++;
@@ -15,13 +16,13 @@ function makeResponse(crimes) {
             crimeIncidents[crime.category] = 1;
             crimeCategories.push(crime.category);
         }
+        total++;
     });
-    // eslint-disable-next-line no-console
-    console.log('crimeIncidents: ' + crimeIncidents);
 
-    return  {
+    return {
         crimeIncidents: crimeIncidents,
-        crimeCategories: crimeCategories
+        crimeCategories: crimeCategories,
+        total: total
     };
 }
 

@@ -8,7 +8,13 @@
             "ERROR_MESSAGE": "Sorry, I didn't understand that request.",
             "LOCATION_ERROR_MESSAGE": "Sorry, there was a problem getting the location of your device.",
             "STOP_MESSAGE": "Goodbye.",
-            "PERMISSION_MESSAGE": "You must enable location services to use this skill"
+            "PERMISSION_MESSAGE": "You must enable location services to use this skill",
+            "OMG": "Oh my god! ",
+            "TOTAL_CRIME": "There was only 1 crime reported in your area last month. ",
+            "TOTAL_CRIMES": "There were {num} crimes reported in your area last month. ",
+            "OF_WHICH": "Of which ",
+            "WAS": " was ",
+            "WERE": " were "
         }
     }
 }
