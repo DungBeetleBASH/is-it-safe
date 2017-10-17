@@ -73,12 +73,14 @@ module.exports = {
 
     'GetPoliceData': function() {
         // eslint-disable-next-line no-console
-        console.log('GetPoliceData');
+        console.log('GetPoliceData', this.attributes.deviceLocation);
         let self = this;
 
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
+            // eslint-disable-next-line no-console
+            console.log('getLocalCrime', err);
             if (err) {
-                return this.emitWithState('LocationError');
+                return this.emitWithState('DataError');
             }
             this.attributes.speechOutput = generatePoliceOutput(crimeData, self.t);
             this.attributes.repromptSpeech = 'temp message';
@@ -133,6 +135,14 @@ module.exports = {
         console.log('LocationError');
         this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE');
         this.attributes.repromptSpeech = this.t('LOCATION_ERROR_MESSAGE');
+        this.emitWithState('RespondAndClose');
+    },
+
+    'DataError': function() {
+        // eslint-disable-next-line no-console
+        console.log('LocationError');
+        this.attributes.speechOutput = this.t('DATA_ERROR_MESSAGE');
+        this.attributes.repromptSpeech = this.t('DATA_ERROR_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
 

@@ -7,6 +7,7 @@
             "HELP_REPROMPT": "",
             "ERROR_MESSAGE": "Sorry, I didn't understand that request.",
             "LOCATION_ERROR_MESSAGE": "Sorry, there was a problem getting the location of your device.",
+            "DATA_ERROR_MESSAGE": "Sorry, there was an error getting local crime data.",
             "STOP_MESSAGE": "Goodbye.",
             "PERMISSION_MESSAGE": "You must enable location services to use this skill",
             "OMG": "Oh my god! ",
