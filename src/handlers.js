@@ -32,7 +32,13 @@ module.exports = {
         let options = getLocationOptions(this.event.context.System);
         location.get(options, (err, deviceLocation) => {
             if (err) {
-                return this.emitWithState('LocationError');
+                // TODO: replace when using real device
+                //return this.emitWithState('LocationError');
+                this.deviceLocation = {
+                    longitude: '-3.2814380',
+                    latitude: '51.4016840'
+                };
+                return this.emitWithState('GetPoliceData');
             }
             this.deviceLocation = deviceLocation;
             this.emitWithState('GetPoliceData');
@@ -78,16 +84,20 @@ module.exports = {
         this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
 
+    'RespondAndClose': function() {
+        this.emit(':tell', this.attributes.speechOutput, this.attributes.repromptSpeech);
+    },
+
     'PermissionRequired': function() {
         this.attributes.speechOutput = this.t('PERMISSION_MESSAGE');
         this.attributes.repromptSpeech = this.t('PERMISSION_MESSAGE');
-        this.emitWithState('Respond');
+        this.emitWithState('RespondAndClose');
     },
 
     'LocationError': function() {
         this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE');
         this.attributes.repromptSpeech = this.t('LOCATION_ERROR_MESSAGE');
-        this.emitWithState('Respond');
+        this.emitWithState('RespondAndClose');
     },
 
     'Unhandled': function() {
