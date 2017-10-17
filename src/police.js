@@ -11,8 +11,11 @@ module.exports = {
         // eslint-disable-next-line no-console
         console.log('url: ' + url);
         fetch(url)
-            .then(res => {
-                done(null, res.json());
+            .then(res => res.json())
+            .then(json => {
+                // eslint-disable-next-line no-console
+                console.log('json: ' + typeof json);
+                done(null, json);
             })
             .catch(e => {
                 done(e);
