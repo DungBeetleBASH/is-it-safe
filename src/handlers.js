@@ -7,7 +7,7 @@ function getLocationOptions(system) {
         locale: 'uk',
         deviceId: system.device.deviceId,
         consentToken: system.user.permissions.consentToken
-    }
+    };
 }
 
 function hasConsentToken(system) {
