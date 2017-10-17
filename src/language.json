@@ -6,7 +6,9 @@
             "HELP_MESSAGE": "",
             "HELP_REPROMPT": "",
             "ERROR_MESSAGE": "Sorry, I didn't understand that request.",
-            "STOP_MESSAGE": "Goodbye."
+            "LOCATION_ERROR_MESSAGE": "Sorry, there was a problem getting the location of your device.",
+            "STOP_MESSAGE": "Goodbye.",
+            "PERMISSION_MESSAGE": "You must enable location services to use this skill"
         }
     }
 }

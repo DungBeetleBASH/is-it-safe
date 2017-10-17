@@ -8,8 +8,8 @@ const baseUris = {
     us: 'api.amazonalexa.com'
 };
 
-function getCountryAndPostCode(locale, deviceId, consentToken, done) {
-    let options = makeRequestObject(locale, deviceId, consentToken);
+function getCountryAndPostCode(locationOptions, done) {
+    let options = makeRequestObject(locationOptions.locale, locationOptions.deviceId, locationOptions.consentToken);
 
     https.get(options, (response) => {
         // eslint-disable-next-line no-console
