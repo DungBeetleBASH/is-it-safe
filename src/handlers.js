@@ -30,17 +30,17 @@ module.exports = {
 
     'GetLocationData': () => {
         let options = getLocationOptions(this.event.context.System);
-        location.get(options, (err, deviceAddress) => {
+        location.get(options, (err, deviceLocation) => {
             if (err) {
                 return this.emitWithState('LocationError');
             }
-            this.deviceAddress = deviceAddress;
+            this.deviceLocation = deviceLocation;
             this.emitWithState('GetPoliceData');
         });
     },
 
     'GetPoliceData': () => {
-        police.getLocalCrime(this.deviceAddress, (err, crimeData) => {
+        police.getLocalCrime(this.deviceLocation, (err, crimeData) => {
             if (err) {
                 return this.emitWithState('LocationError');
             }
