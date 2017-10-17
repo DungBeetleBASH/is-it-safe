@@ -1,20 +1,16 @@
 language: node_js
 node_js:
 - 7.7
-
 script:
 - npm run build
-
 deploy:
-  skip_cleanup: true
   provider: s3
-  access_key_id: AKIAIRM7LDU3IDN3NGQQ
+  access_key_id: AKIAJEGO5NVCIBLNMZDA
   secret_access_key:
-    secure: QomPhMv1wAuU0b1Fd7BQ+JcQeZYqeKOmc5QFZMkK1xI6JfIEcqhelz2Jj3YQpLiC/mkz4EG0b+mFmoY3WPpcszda9IQlsENJBgGB0rttsEmc1OZWXdXZeWhjHcNp0Ek1zg5S5QWRN2CajKTthDYAC9goNjAiTlxiJig3MRRLsElLyw9Sf3tT/KgnHvJ3PDQQnCZh9JHBY3gxMwDMhpCVBTz7HdixmF9vv6hJtaADfjphRNxUH0Ycbwq2JxQPVU+W9pIPQ5W+LUQ6M856+3yhmPtck/T/htz7qubCXVB9fDV1aoTtriBABWb85x8rhKdvpPMI9xz/BtebPqstIwNGr3Lq7Dq6/9s+UcD/6Tm532/72FSzPV/+xuw+UX/Bo6UUdDyWLbqY+lfu4J5AIKb5PLLfnd6PozFAKkxG4NH41KOnCfLjmwjqUE5JXeIefcxD2TqqtRMJF1dAvwUcC59fN5EJsHMnNDaKMNUNn5PDwoz7acSkX3MoXgUAuyyOZ5EYiet1R4Cmsr48ogy/1DJpYBfsDte9Gn93c+eMZUEUApl9j1E/AvyWfHF67xFsDlMmTJazUdZ3IFBjyZHhVDL9qiAl2uwodKD0MjhWV/s3jodF6+uMZ99JfITHvdcswu0o+4PpUg1O4MRQfrrzySMcJwv+12cTdFV7BA/I8csHdZo=
+    secure: l7R40NTeVFaBz+sKMrbgjzfoDRUYux/phcKQbeOJWzmGnsHcrFkQeibwGyqH5/5eyHgEELPy/V7ZgEUygHB/GnaaH2SOTSVdv38gq0IhsILyUZ4/TjCCxW85jScQ3zfMnPJfA5kO4p0Bb2OKX5pV8335dCEVh9jHowK4H3pdg+P9rqteU5dKI99gNqU90tuhyX8wRe1NUNzlSQ27s+McaZ9OTRKyt+PtR7ya4Dl+BG7QIObivAnJrbl3gVN+g+tT/WBHhNQ/FuVL7SAs25E97qhyEEALYYyeCLvBonM2GtQ2DXVzs0ue/nJMvL3aZnp/4r9FfYzFkRGjeif4Myzh0EkskhmAotsw13JuevS+Y0bW1dp6+nML/CplhbxZfmoZoxTeRBl0xi0wK3U3DUVITf0p84dEJr9736tCTzmBl2Q7fbx9e/53jwQZV92yc5cxigt5wRZrSklx24KR6MsSQY5rMADxCxTVp3vAa6CHouSrrRwegxibKMx9x3lozVRdi7jolyqTQy5TUOvNnYB3gVYCmsEW7btd7dfFRe0VP1DnqX+gfXxKSbyRqq4t2MxDxNtXggSDYDLFQ+pFa6aX0Uqrx9G317GgRogo3y+tIsTGbQU1MbGwPZPJKyLEqML0F3K/4Np4bKNXbI0lvz7GLif+1YBnnz7cY+AeTTkxqTc=
   bucket: dung-beetle-bash-travis-builds
   local-dir: deploy
   upload-dir: is-it-safe
   acl: authenticated_read
   on:
     repo: DungBeetleBASH/is-it-safe
-
