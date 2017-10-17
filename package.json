@@ -5,9 +5,10 @@
   "repository": "https://github.com/DungBeetleBASH/is-it-safe",
   "main": "index.js",
   "scripts": {
-    "mocha": "mocha '**.test.js'",
-    "lint": "eslint",
+    "mocha": "mocha 'src/*.test.js'",
+    "lint": "eslint src",
     "test": "npm run lint && npm run mocha",
+    "install_prod": "npm --prefix ./src install ./src --production",
     "clean": "rm -rf deploy 2> /dev/null && mkdir deploy",
     "zip": "cd src; zip -r ../deploy/is-it-safe_${TRAVIS_BRANCH}_${TRAVIS_BUILD_NUMBER}.zip handlers.js index.js language.json node_modules",
     "deploy": "npm run clean && npm run zip",
