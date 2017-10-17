@@ -7,10 +7,14 @@ const APP_ID = process.env.APP_ID;
 
 AWS.config.update({ region: 'eu-west-1' });
 
-exports.handler = (event: Alexa.RequestBody<Alexa.Request>, context: Alexa.Context): void => {
-    const alexa = Alexa.handler(event, context);
-    alexa.appId = APP_ID;
-    alexa.resources = language;
-    alexa.registerHandlers(handlers);
-    alexa.execute();
-};
+export class Handler {
+
+	constructor(event: Alexa.RequestBody<Alexa.Request>, context: Alexa.Context) {
+	    const alexa = Alexa.handler(event, context);
+	    alexa.appId = APP_ID;
+	    alexa.resources = language;
+	    alexa.registerHandlers(handlers);
+	    alexa.execute();
+	}
+
+}
