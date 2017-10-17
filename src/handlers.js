@@ -44,6 +44,8 @@ module.exports = {
 
     'GetPoliceData': function() {
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
+            // eslint-disable-next-line no-console
+            console.log('getLocalCrime', err, crimeData);
             if (err) {
                 return this.emitWithState('LocationError');
             }
