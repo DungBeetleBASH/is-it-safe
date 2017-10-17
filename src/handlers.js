@@ -30,25 +30,29 @@ module.exports = {
 
     'GetLocationData': function() {
         let options = getLocationOptions(this.event.context.System);
+        let self = this;
         location.get(options, (err, deviceLocation) => {
             if (err) {
                 // TODO: replace when using real device
                 //return this.emitWithState('LocationError');
-                this.deviceLocation = {
+                self.deviceLocation = {
                     longitude: '-3.2814380',
                     latitude: '51.4016840'
                 };
-                return this.emitWithState('GetPoliceData');
+                return self.emitWithState('GetPoliceData');
             }
-            this.deviceLocation = deviceLocation;
-            this.emitWithState('GetPoliceData');
+            self.deviceLocation = deviceLocation;
+            self.emitWithState('GetPoliceData');
         });
     },
 
     'GetPoliceData': function() {
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(this.deviceLocation, null, 4));
+        let self = this;
         police.getLocalCrime(this.deviceLocation, (err, crimeData) => {
             if (err) {
-                return this.emitWithState('LocationError');
+                return self.emitWithState('LocationError');
             }
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(crimeData, null, 4));
