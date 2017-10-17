@@ -17,7 +17,7 @@ function getCountryAndPostCode(locationOptions, done) {
     });
 
 
-    let url = `${baseUris[locationOptions.locale]}/v1/devices/${locationOptions.deviceId}/settings/address/countryAndPostalCode`;
+    /*let url = `${baseUris[locationOptions.locale]}/v1/devices/${locationOptions.deviceId}/settings/address/countryAndPostalCode`;
     let options = makeRequestObject(locationOptions.consentToken);
 
     fetch(url, options)
@@ -26,7 +26,7 @@ function getCountryAndPostCode(locationOptions, done) {
         })
         .catch((err) => {
             done(err);
-        });
+        });*/
 }
 
 function makeRequestObject(consentToken) {
