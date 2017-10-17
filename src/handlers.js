@@ -41,10 +41,14 @@ function generatePoliceOutput(crimeData, trans) {
 module.exports = {
 
     'LaunchRequest': function() {
+        // eslint-disable-next-line no-console
+        console.log('LaunchRequest');
         this.emitWithState('VerifyPermission');
     },
 
     'VerifyPermission': function() {
+        // eslint-disable-next-line no-console
+        console.log('VerifyPermission');
         if (!hasConsentToken(this.event.context.System)) {
             return this.emitWithState('PermissionRequired');
         }
@@ -52,6 +56,8 @@ module.exports = {
     },
 
     'GetLocationData': function() {
+        // eslint-disable-next-line no-console
+        console.log('GetLocationData');
         let options = getLocationOptions(this.event.context.System);
         let self = this;
         location.get(options, (err, deviceLocation) => {
@@ -66,6 +72,8 @@ module.exports = {
     },
 
     'GetPoliceData': function() {
+        // eslint-disable-next-line no-console
+        console.log('GetPoliceData');
         let self = this;
 
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
@@ -101,20 +109,28 @@ module.exports = {
     },
 
     'Respond': function() {
+        // eslint-disable-next-line no-console
+        console.log('Respond');
         this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
 
     'RespondAndClose': function() {
+        // eslint-disable-next-line no-console
+        console.log('RespondAndClose');
         this.emit(':tell', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
 
     'PermissionRequired': function() {
+        // eslint-disable-next-line no-console
+        console.log('PermissionRequired');
         this.attributes.speechOutput = this.t('PERMISSION_MESSAGE');
         this.attributes.repromptSpeech = this.t('PERMISSION_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
 
     'LocationError': function() {
+        // eslint-disable-next-line no-console
+        console.log('LocationError');
         this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE');
         this.attributes.repromptSpeech = this.t('LOCATION_ERROR_MESSAGE');
         this.emitWithState('RespondAndClose');
