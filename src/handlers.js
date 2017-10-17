@@ -82,7 +82,7 @@ module.exports = {
             if (err) {
                 return this.emitWithState('DataError');
             }
-            this.attributes.speechOutput = generatePoliceOutput(crimeData, self.t);
+            this.attributes.speechOutput = generatePoliceOutput(crimeData, self.t.bind(self));
             this.attributes.repromptSpeech = 'temp message';
             this.emitWithState('RespondAndClose');
         });
