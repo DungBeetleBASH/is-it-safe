@@ -3,6 +3,7 @@
   "rules": {
     "quotemark": [true, "single"],
     "trailing-comma": [true, {"multiline": "ignore", "singleline": "never"}],
-    "object-literal-sort-keys": [false]
+    "object-literal-sort-keys": [false],
+    "indent": [true, "space", 4]
   }
 }

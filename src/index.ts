@@ -10,11 +10,11 @@ AWS.config.update({ region: 'eu-west-1' });
 export class Handler {
 
 	constructor(event: Alexa.RequestBody<Alexa.Request>, context: Alexa.Context) {
-	    const alexa = Alexa.handler(event, context);
-	    alexa.appId = APP_ID;
-	    alexa.resources = language;
-	    alexa.registerHandlers(handlers);
-	    alexa.execute();
+		const alexa = Alexa.handler(event, context);
+		alexa.appId = APP_ID;
+		alexa.resources = language;
+		alexa.registerHandlers(handlers);
+		alexa.execute();
 	}
 
 }
