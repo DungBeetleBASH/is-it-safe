@@ -19,7 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "alexa-sdk": "^1.0.11",
-    "aws-sdk": "^2.81.0"
+    "aws-sdk": "^2.81.0",
+    "postcodesio-client": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.0",

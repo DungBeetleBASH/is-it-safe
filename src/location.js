@@ -1,12 +1,14 @@
 'use strict';
 
 const https = require('https');
+const PostcodesIO = require('postcodesio-client');
 
 const baseUris = {
     uk: 'api.eu.amazonalexa.com',
     de: 'api.eu.amazonalexa.com',
     us: 'api.amazonalexa.com'
 };
+const postcodes = new PostcodesIO();
 
 function getCountryAndPostCode(locationOptions, done) {
     let options = makeRequestObject(locationOptions.locale, locationOptions.deviceId, locationOptions.consentToken);
@@ -28,7 +30,8 @@ function getCountryAndPostCode(locationOptions, done) {
                 return done(e);
             }
 
-            done(null, deviceAddress);
+            getLocation(deviceAddress, done);
+
         });
     }).on('error', (e) => {
         done(e);
@@ -45,6 +48,29 @@ function makeRequestObject(locale, deviceId, consentToken) {
             'Authorization': 'Bearer ' + consentToken
         }
     };
+}
+
+function getLocation(deviceAddress, done) {
+
+    postcodes
+        .lookup(deviceAddress.postalCode)
+        .then((response) => {
+
+            if (!response) {
+                return done(new Error('Location not found'));
+            }
+
+            const location = {
+                longitude: response.longitude,
+                latitude: response.latitude
+            };
+
+            done(null, location);
+
+        }, (err) => {
+            done(err);
+        });
+
 }
 
 module.exports = {
