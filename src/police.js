@@ -9,11 +9,10 @@ function makeResponse(crimes) {
     let crimeIncidents = {};
     let crimeCategories = [];
     crimes.forEach(crime => {
-        let category = crimeIncidents[crime.category];
-        if (category !== undefined) {
-            category++;
+        if (crimeIncidents[crime.category] !== undefined) {
+            crimeIncidents[crime.category]++;
         } else {
-            category = 1;
+            crimeIncidents[crime.category] = 1;
             crimeCategories.push(crime.category);
         }
     });
