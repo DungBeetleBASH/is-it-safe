@@ -26,7 +26,8 @@ function getCountryAndPostCode(locationOptions, done) {
 
             done(null, deviceAddress);
 
-        }, (err) => {
+        })
+        .catch((err) => {
             done(err);
         });
 }
@@ -59,7 +60,8 @@ function getLocation(deviceAddress, done) {
 
             done(null, location);
 
-        }, (err) => {
+        })
+        .catch((err) => {
             done(err);
         });
 
