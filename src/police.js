@@ -1,10 +1,14 @@
 'use strict';
 
-const ukpd = require('ukpd');
+const fetch = require('node-fetch');
+
+const api = 'https://data.police.uk/api';
+const street = '/crimes-street/all-crime?';
 
 module.exports = {
     getLocalCrime(location, done) {
-        ukpd.streetLevel(location.latitude, location.longitude)
+        let url = `${api}${street}lat=${location.latitude}lng=${location.longitude}`;
+        fetch(url)
             .then(data => {
                 // eslint-disable-next-line no-console
                 console.log(JSON.stringify(data, null, 4));
