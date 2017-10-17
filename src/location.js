@@ -12,6 +12,7 @@ function getCountryAndPostCode(locale, deviceId, consentToken, done) {
     let options = makeRequestObject(locale, deviceId, consentToken);
 
     https.get(options, (response) => {
+        // eslint-disable-next-line no-console
         console.log(`Device Address API responded with a status code of : ${response.statusCode}`);
 
         response.on('data', (data) => {
