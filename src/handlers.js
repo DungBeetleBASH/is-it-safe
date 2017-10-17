@@ -48,7 +48,7 @@ module.exports = {
         let self = this;
         // eslint-disable-next-line no-console
         console.log('self.attributes.deviceLocation', JSON.stringify(self.attributes.deviceLocation, null, 4));
-        police.getLocalCrime(this.deviceLocation, (err, crimeData) => {
+        police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
             if (err) {
                 return self.emitWithState('LocationError');
             }
