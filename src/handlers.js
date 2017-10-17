@@ -17,18 +17,18 @@ function hasConsentToken(system) {
 
 module.exports = {
 
-    'LaunchRequest': () => {
+    'LaunchRequest': function() {
         this.emitWithState('VerifyPermission');
     },
 
-    'VerifyPermission': () => {
+    'VerifyPermission': function() {
         if (!hasConsentToken(this.event.context.System)) {
             return this.emitWithState('PermissionRequired');
         }
         this.emitWithState('GetLocationData');
     },
 
-    'GetLocationData': () => {
+    'GetLocationData': function() {
         let options = getLocationOptions(this.event.context.System);
         location.get(options, (err, deviceLocation) => {
             if (err) {
@@ -39,7 +39,7 @@ module.exports = {
         });
     },
 
-    'GetPoliceData': () => {
+    'GetPoliceData': function() {
         police.getLocalCrime(this.deviceLocation, (err, crimeData) => {
             if (err) {
                 return this.emitWithState('LocationError');
@@ -52,45 +52,45 @@ module.exports = {
         this.emitWithState('Respond');
     },
 
-    'AMAZON.HelpIntent': () => {
+    'AMAZON.HelpIntent': function() {
         this.attributes.speechOutput = this.t('HELP_MESSAGE');
         this.attributes.repromptSpeech = this.t('HELP_REPROMPT');
         this.emitWithState('Respond');
     },
 
-    'AMAZON.RepeatIntent': () => {
+    'AMAZON.RepeatIntent': function() {
         this.emitWithState('Respond');
     },
 
-    'AMAZON.StopIntent': () => {
+    'AMAZON.StopIntent': function() {
         this.emit('SessionEndedRequest');
     },
 
-    'AMAZON.CancelIntent': () => {
+    'AMAZON.CancelIntent': function() {
         this.emit('SessionEndedRequest');
     },
 
-    'SessionEndedRequest': () => {
+    'SessionEndedRequest': function() {
         this.emit(':tell', this.t('STOP_MESSAGE'));
     },
 
-    'Respond': () => {
+    'Respond': function() {
         this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
 
-    'PermissionRequired': () => {
+    'PermissionRequired': function() {
         this.attributes.speechOutput = this.t('PERMISSION_MESSAGE');
         this.attributes.repromptSpeech = this.t('PERMISSION_MESSAGE');
         this.emitWithState('Respond');
     },
 
-    'LocationError': () => {
+    'LocationError': function() {
         this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE');
         this.attributes.repromptSpeech = this.t('LOCATION_ERROR_MESSAGE');
         this.emitWithState('Respond');
     },
 
-    'Unhandled': () => {
+    'Unhandled': function() {
         this.emitWithState('AMAZON.HelpIntent');
     }
 };
