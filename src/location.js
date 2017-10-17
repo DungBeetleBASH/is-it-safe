@@ -1,41 +1,30 @@
 'use strict';
 
 const PostcodesIO = require('postcodesio-client');
-const httpsPromise = require('./httpsPromise');
+const fetch = require('node-fetch');
 
 const baseUris = {
-    uk: 'api.eu.amazonalexa.com',
-    de: 'api.eu.amazonalexa.com',
-    us: 'api.amazonalexa.com'
+    uk: 'https://api.eu.amazonalexa.com',
+    de: 'https://api.eu.amazonalexa.com',
+    us: 'https://api.amazonalexa.com'
 };
 const postcodes = new PostcodesIO();
 
 function getCountryAndPostCode(locationOptions, done) {
-    let options = makeRequestObject(locationOptions.locale, locationOptions.deviceId, locationOptions.consentToken);
+    let url = `${baseUris[locationOptions.locale]}/v1/devices/${locationOptions.deviceId}/settings/address/countryAndPostalCode`;
+    let options = makeRequestObject(locationOptions.consentToken);
 
-    httpsPromise
-        .get(options)
-        .then((data) => {
-            let deviceAddress;
-
-            try {
-                deviceAddress = JSON.parse(data);
-            } catch (e) {
-                return done(e);
-            }
-
-            done(null, deviceAddress);
-
+    fetch(url, options)
+        .then(res => {
+            done(null, res.json());
         })
         .catch((err) => {
             done(err);
         });
 }
 
-function makeRequestObject(locale, deviceId, consentToken) {
+function makeRequestObject(consentToken) {
     return {
-        hostname: baseUris[locale],
-        path: `/v1/devices/${deviceId}/settings/address/countryAndPostalCode`,
         method: 'GET',
         headers: {
             Authorization: `Bearer ${consentToken}`
