@@ -13,7 +13,8 @@ const postcodes = new PostcodesIO();
 function getCountryAndPostCode(locationOptions, done) {
     let options = makeRequestObject(locationOptions.locale, locationOptions.deviceId, locationOptions.consentToken);
 
-    httpsPromise.get(options)
+    httpsPromise
+        .get(options)
         .then((data) => {
             let deviceAddress;
 
@@ -23,7 +24,7 @@ function getCountryAndPostCode(locationOptions, done) {
                 return done(e);
             }
 
-            getLocation(deviceAddress, done);
+            done(null, deviceAddress);
 
         }, (err) => {
             done(err);
@@ -65,5 +66,17 @@ function getLocation(deviceAddress, done) {
 }
 
 module.exports = {
-    get: getCountryAndPostCode
+    get: function(locationOptions, done) {
+        getCountryAndPostCode(locationOptions, function (err, deviceAddress) {
+            if (err) {
+                return done(err);
+            }
+            getLocation(deviceAddress, function (err, location) {
+                if (err) {
+                    return done(err);
+                }
+                done(null, location);
+            });
+        });
+    }
 };
