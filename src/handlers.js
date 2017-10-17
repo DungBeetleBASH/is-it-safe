@@ -43,17 +43,14 @@ module.exports = {
     },
 
     'GetPoliceData': function() {
-        // eslint-disable-next-line no-console
-        console.log('this.attributes.deviceLocation', JSON.stringify(this.attributes.deviceLocation, null, 4));
         let self = this;
-        // eslint-disable-next-line no-console
-        console.log('self.attributes.deviceLocation', JSON.stringify(self.attributes.deviceLocation, null, 4));
+        
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
             if (err) {
                 return self.emitWithState('LocationError');
             }
             // eslint-disable-next-line no-console
-            console.log('crimeData', JSON.stringify(crimeData, null, 4));
+            console.log('crimeData', crimeData);
             this.attributes.speechOutput = 'temp message';
             this.attributes.repromptSpeech = 'temp message';
             this.emitWithState('Respond');

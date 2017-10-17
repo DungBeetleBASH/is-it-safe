@@ -14,6 +14,8 @@ module.exports = {
             .then(res => {
                 done(null, res.json());
             })
-            .catch(done);
+            .catch(e => {
+                done(e);
+            });
     }
 };
