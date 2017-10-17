@@ -35,13 +35,7 @@ module.exports = {
             // eslint-disable-next-line no-console
             console.log('location.get', err, deviceLocation);
             if (err) {
-                // TODO: replace when using real device
-                //return this.emitWithState('LocationError');
-                self.deviceLocation = {
-                    longitude: '-3.2814380',
-                    latitude: '51.4016840'
-                };
-                return self.emitWithState('GetPoliceData');
+                return this.emitWithState('LocationError');
             }
             self.deviceLocation = deviceLocation;
             self.emitWithState('GetPoliceData');

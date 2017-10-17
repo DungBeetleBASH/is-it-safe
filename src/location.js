@@ -11,6 +11,12 @@ const baseUris = {
 const postcodes = new PostcodesIO();
 
 function getCountryAndPostCode(locationOptions, done) {
+    // TODO remove temp code
+    return done(null, {
+        postalCode: 'CF62 7EE'
+    });
+
+
     let url = `${baseUris[locationOptions.locale]}/v1/devices/${locationOptions.deviceId}/settings/address/countryAndPostalCode`;
     let options = makeRequestObject(locationOptions.consentToken);
 
