@@ -54,10 +54,10 @@ module.exports = {
             }
             // eslint-disable-next-line no-console
             console.log('crimeData', JSON.stringify(crimeData, null, 4));
+            this.attributes.speechOutput = 'temp message';
+            this.attributes.repromptSpeech = 'temp message';
+            this.emitWithState('Respond');
         });
-        this.attributes.speechOutput = 'temp message';
-        this.attributes.repromptSpeech = 'temp message';
-        this.emitWithState('Respond');
     },
 
     'AMAZON.HelpIntent': function() {
