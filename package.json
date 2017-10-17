@@ -8,9 +8,8 @@
     "mocha": "mocha '**.test.js'",
     "lint": "eslint",
     "test": "npm run lint && npm run mocha",
-    "install_prod": "npm --prefix ./src install ./src --production",
     "clean": "rm -rf deploy 2> /dev/null && mkdir deploy",
-    "zip": "cd src; zip -r ../deploy/is-it-safe_${TRAVIS_BRANCH}_${TRAVIS_BUILD_NUMBER}.zip is-it-safe.dynamo.js handlers.js index.js language.json node_modules",
+    "zip": "cd src; zip -r ../deploy/is-it-safe_${TRAVIS_BRANCH}_${TRAVIS_BUILD_NUMBER}.zip handlers.js index.js language.json node_modules",
     "deploy": "npm run clean && npm run zip",
     "build": "npm test && npm run install_prod && npm run deploy"
   },
