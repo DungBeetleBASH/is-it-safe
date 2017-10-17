@@ -1,6 +1,6 @@
-import * as Alexa from 'alexa-sdk';
+'use strict';
 
-export const handlers: Alexa.Handlers<Alexa.Request> = {
+module.exports = {
 
     'LaunchRequest': () => {
         this.attributes.speechOutput = this.t('LAUNCH_MESSAGE');
