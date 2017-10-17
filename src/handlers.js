@@ -37,15 +37,17 @@ module.exports = {
             if (err) {
                 return this.emitWithState('LocationError');
             }
-            self.deviceLocation = deviceLocation;
+            self.attributes.deviceLocation = deviceLocation;
             self.emitWithState('GetPoliceData');
         });
     },
 
     'GetPoliceData': function() {
         // eslint-disable-next-line no-console
-        console.log('this.deviceLocation', JSON.stringify(this.deviceLocation, null, 4));
+        console.log('this.attributes.deviceLocation', JSON.stringify(this.attributes.deviceLocation, null, 4));
         let self = this;
+        // eslint-disable-next-line no-console
+        console.log('self.attributes.deviceLocation', JSON.stringify(self.attributes.deviceLocation, null, 4));
         police.getLocalCrime(this.deviceLocation, (err, crimeData) => {
             if (err) {
                 return self.emitWithState('LocationError');
