@@ -38,7 +38,7 @@ function makeRequestObject(locale, deviceId, consentToken) {
         path: `/v1/devices/${deviceId}/settings/address/countryAndPostalCode`,
         method: 'GET',
         headers: {
-            Authorization: 'Bearer ' + consentToken
+            Authorization: `Bearer ${consentToken}`
         }
     };
 }

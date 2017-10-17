@@ -1,6 +1,7 @@
 'use strict';
 
 const location = require('./location');
+const police = require('./police');
 
 function getLocationOptions(system) {
     return {
@@ -17,24 +18,35 @@ function hasConsentToken(system) {
 module.exports = {
 
     'LaunchRequest': () => {
+        this.emitWithState('VerifyPermission');
+    },
+
+    'VerifyPermission': () => {
         if (!hasConsentToken(this.event.context.System)) {
             return this.emitWithState('PermissionRequired');
-        } else {
-            let options = getLocationOptions(this.event.context.System);
-            location.get(options, (err, deviceAddress) => {
-                if (err) {
-                    return this.emitWithState('LocationError');
-                }
-                this.deviceAddress = deviceAddress;
-                this.emitWithState('GetPoliceData');
-            });
         }
-        this.attributes.speechOutput = this.t('LAUNCH_MESSAGE');
-        this.attributes.repromptSpeech = this.t('LAUNCH_MESSAGE');
-        this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
+        this.emitWithState('GetLocationData');
+    },
+
+    'GetLocationData': () => {
+        let options = getLocationOptions(this.event.context.System);
+        location.get(options, (err, deviceAddress) => {
+            if (err) {
+                return this.emitWithState('LocationError');
+            }
+            this.deviceAddress = deviceAddress;
+            this.emitWithState('GetPoliceData');
+        });
     },
 
     'GetPoliceData': () => {
+        police.getLocalCrime(this.deviceAddress, (err, crimeData) => {
+            if (err) {
+                return this.emitWithState('LocationError');
+            }
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(crimeData, null, 4));
+        });
         this.attributes.speechOutput = 'temp message';
         this.attributes.repromptSpeech = 'temp message';
         this.emitWithState('Respond');
