@@ -23,7 +23,7 @@ function generatePoliceOutput(crimeData, trans) {
     if (crimeData.total === 1) {
         output += trans('TOTAL_CRIME');
     } else {
-        output += trans('TOTAL_CRIMES').replace(/\{num\}/g, String(crimeData.total));
+        output += trans('TOTAL_CRIMES').replace('{num}', String(crimeData.total));
     }
     if (crimeData.total > 0) {
         output += '<break time="0.5s"/>';
@@ -32,7 +32,7 @@ function generatePoliceOutput(crimeData, trans) {
             let count = crimeData.crimeIncidents[category];
             output += '<break time="0.5s"/>' + String(count);
             output += (count === 1) ? trans('WAS') : trans('WERE');
-            output += ' ' + category.replace('-', ' ');
+            output += ' ' + category.replace(/-/g, ' ');
         });
     }
     return output;
