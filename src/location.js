@@ -1,6 +1,7 @@
 'use strict';
 
 const https = require('https');
+
 const baseUris = {
     uk: 'api.eu.amazonalexa.com',
     de: 'api.eu.amazonalexa.com',
