@@ -32,6 +32,8 @@ module.exports = {
         let options = getLocationOptions(this.event.context.System);
         let self = this;
         location.get(options, (err, deviceLocation) => {
+            // eslint-disable-next-line no-console
+            console.log('location.get', err, deviceLocation);
             if (err) {
                 // TODO: replace when using real device
                 //return this.emitWithState('LocationError');
@@ -48,14 +50,14 @@ module.exports = {
 
     'GetPoliceData': function() {
         // eslint-disable-next-line no-console
-        console.log(JSON.stringify(this.deviceLocation, null, 4));
+        console.log('this.deviceLocation', JSON.stringify(this.deviceLocation, null, 4));
         let self = this;
         police.getLocalCrime(this.deviceLocation, (err, crimeData) => {
             if (err) {
                 return self.emitWithState('LocationError');
             }
             // eslint-disable-next-line no-console
-            console.log(JSON.stringify(crimeData, null, 4));
+            console.log('crimeData', JSON.stringify(crimeData, null, 4));
         });
         this.attributes.speechOutput = 'temp message';
         this.attributes.repromptSpeech = 'temp message';
