@@ -1,13 +1,13 @@
 'use strict';
 
 const PostcodesIO = require('postcodesio-client');
-const fetch = require('node-fetch');
+/*const fetch = require('node-fetch');
 
 const baseUris = {
     uk: 'https://api.eu.amazonalexa.com',
     de: 'https://api.eu.amazonalexa.com',
     us: 'https://api.amazonalexa.com'
-};
+};*/
 const postcodes = new PostcodesIO();
 
 function getCountryAndPostCode(locationOptions, done) {
@@ -29,14 +29,14 @@ function getCountryAndPostCode(locationOptions, done) {
         });*/
 }
 
-function makeRequestObject(consentToken) {
+/*function makeRequestObject(consentToken) {
     return {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${consentToken}`
         }
     };
-}
+}*/
 
 function getLocation(deviceAddress, done) {
 
