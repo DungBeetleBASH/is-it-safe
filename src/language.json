@@ -2,18 +2,30 @@
     "en": {
         "translation": {
             "SKILL_NAME": "Is it safe?",
-            "LAUNCH_MESSAGE": "",
+            "LAUNCH_MESSAGE": "Hi, welcome to, is it safe. ",
             "HELP_MESSAGE": "",
             "HELP_REPROMPT": "",
             "ERROR_MESSAGE": "Sorry, I didn't understand that request.",
             "LOCATION_ERROR_MESSAGE": "Sorry, there was a problem getting the location of your device.",
             "DATA_ERROR_MESSAGE": "Sorry, there was an error getting local crime data.",
             "STOP_MESSAGE": "Goodbye.",
-            "PERMISSION_MESSAGE": "You must enable location services to use this skill",
-            "OMG": "Oh my god! ",
+            "PERMISSION_MESSAGE": "Oh bummer. You haven't enabled location permissions. I need your post code to give you what you want. You can enable it in you Alexa app on your phone thing.",
+            "HMMM": "Hmmm ",
+            "EXCLAMATIONS": [
+                "Oh my god! ",
+                "Wowzers! ",
+                "Wow! ",
+                "Holy mackerel! ",
+                "ZOMG! ",
+                "Oh wow! ",
+                "By gum! ",
+                "Strewth! ",
+                "Zoinks! ",
+                "Gordon Bennett! "
+            ],
             "TOTAL_CRIME": "There was only 1 crime reported in your area last month. ",
             "TOTAL_CRIMES": "There were {num} crimes reported in your area last month. ",
-            "OF_WHICH": "Of which ",
+            "HEAR_MORE": "Would you like to hear more?",
             "WAS": " was ",
             "WERE": " were "
         }

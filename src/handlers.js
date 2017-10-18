@@ -2,6 +2,7 @@
 
 const location = require('./location');
 const police = require('./police');
+const speech = require('/speech');
 
 function getLocationOptions(system) {
     return {
@@ -16,39 +17,18 @@ function hasConsentToken(system) {
 }
 
 function generatePoliceOutput(crimeData, trans) {
-    let output = '';
-    if (crimeData.total > 10) {
-        output += trans('OMG');
-    }
-    if (crimeData.total === 1) {
-        output += trans('TOTAL_CRIME');
-    } else {
-        output += trans('TOTAL_CRIMES').replace('{num}', String(crimeData.total));
-    }
-    if (crimeData.total > 0) {
-        output += '<break time="0.5s"/>';
-        output += trans('OF_WHICH');
-        crimeData.crimeCategories.forEach(category => {
-            let count = crimeData.crimeIncidents[category];
-            output += '<break time="0.5s"/>' + String(count);
-            output += (count === 1) ? trans('WAS') : trans('WERE');
-            output += ' ' + category.replace(/-/g, ' ');
-        });
-    }
+    let output = speech.getTotalCrimePrefix(crimeData);
+    output += speech.getTotalCrimeStats(crimeData);
     return output;
 }
 
 module.exports = {
 
     'LaunchRequest': function() {
-        // eslint-disable-next-line no-console
-        console.log('LaunchRequest');
         this.emitWithState('VerifyPermission');
     },
 
     'VerifyPermission': function() {
-        // eslint-disable-next-line no-console
-        console.log('VerifyPermission');
         if (!hasConsentToken(this.event.context.System)) {
             return this.emitWithState('PermissionRequired');
         }
@@ -56,35 +36,28 @@ module.exports = {
     },
 
     'GetLocationData': function() {
-        // eslint-disable-next-line no-console
-        console.log('GetLocationData');
         let options = getLocationOptions(this.event.context.System);
-        let self = this;
+
         location.get(options, (err, deviceLocation) => {
-            // eslint-disable-next-line no-console
-            console.log('location.get', err, deviceLocation);
             if (err) {
                 return this.emitWithState('LocationError');
             }
-            self.attributes.deviceLocation = deviceLocation;
-            self.emitWithState('GetPoliceData');
+            this.attributes.deviceLocation = deviceLocation;
+            this.emitWithState('GetPoliceData');
         });
     },
 
     'GetPoliceData': function() {
-        // eslint-disable-next-line no-console
-        console.log('GetPoliceData', this.attributes.deviceLocation);
-        let self = this;
-
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
-            // eslint-disable-next-line no-console
-            console.log('getLocalCrime', err);
             if (err) {
                 return this.emitWithState('DataError');
             }
-            this.attributes.speechOutput = generatePoliceOutput(crimeData, self.t.bind(self));
-            this.attributes.repromptSpeech = 'temp message';
-            this.emitWithState('RespondAndClose');
+            this.attributes.speechOutput = this.t('LAUNCH_MESSAGE');
+            this.attributes.speechOutput += generatePoliceOutput(crimeData);
+            this.attributes.speechOutput += this.t('HEAR_MORE');
+            this.attributes.repromptSpeech = this.t('HEAR_MORE');
+            this.attributes.crimeData = crimeData;
+            this.emitWithState('Respond');
         });
     },
 

@@ -6,22 +6,22 @@ const api = 'https://data.police.uk/api';
 const street = '/crimes-street/all-crime?';
 
 function makeResponse(crimes) {
-    let crimeIncidents = {};
-    let crimeCategories = [];
+    let incidents = {};
+    let categories = [];
     let total = 0;
     crimes.forEach(crime => {
-        if (crimeIncidents[crime.category] !== undefined) {
-            crimeIncidents[crime.category]++;
+        if (incidents[crime.category] !== undefined) {
+            incidents[crime.category]++;
         } else {
-            crimeIncidents[crime.category] = 1;
-            crimeCategories.push(crime.category);
+            incidents[crime.category] = 1;
+            categories.push(crime.category);
         }
         total++;
     });
 
     return {
-        crimeIncidents: crimeIncidents,
-        crimeCategories: crimeCategories,
+        incidents: incidents,
+        categories: categories,
         total: total
     };
 }
