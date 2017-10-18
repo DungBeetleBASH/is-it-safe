@@ -16,7 +16,7 @@ function hasConsentToken(system) {
     return !!(system && system.user && system.user.permissions && system.user.permissions.consentToken);
 }
 
-function generatePoliceOutput(crimeData, trans) {
+function generatePoliceOutput(crimeData) {
     let output = speech.getTotalCrimePrefix(crimeData);
     output += speech.getTotalCrimeStats(crimeData);
     return output;
