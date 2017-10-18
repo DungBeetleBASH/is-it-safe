@@ -2,7 +2,7 @@
 
 const location = require('./location');
 const police = require('./police');
-const speech = require('/speech');
+const speech = require('./speech');
 
 function getLocationOptions(system) {
     return {
