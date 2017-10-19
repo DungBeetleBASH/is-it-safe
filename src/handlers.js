@@ -138,7 +138,7 @@ module.exports = {
 
     'SessionEndedRequest': function() {
         console.log('SessionEndedRequest');
-        this.emit(':tell', this.t('STOP_MESSAGE'));
+        this.emit(':tell', speech.getRandom('STOP_MESSAGES'));
     },
 
     'Respond': function() {
@@ -174,7 +174,7 @@ module.exports = {
 
     'WeirdError': function() {
         console.log('WeirdError');
-        this.attributes.speechOutput = this.t('WEIRD_ERROR') + ' ' + this.t('STOP_MESSAGE');
+        this.attributes.speechOutput = this.t('WEIRD_ERROR') + ' ' + speech.getRandom('STOP_MESSAGES');
         this.emitWithState('RespondAndClose');
     },
 

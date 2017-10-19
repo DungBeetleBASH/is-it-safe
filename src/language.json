@@ -9,7 +9,6 @@
             "LOCATION_ERROR_MESSAGE": "Sorry, there was a problem getting the location of your device.",
             "DATA_ERROR_MESSAGE": "Sorry, there was an error getting local crime data.",
             "WEIRD_ERROR": "Sorry, there was some kind of weird error.",
-            "STOP_MESSAGE": "K Thanks Bai!",
             "STOP_MESSAGES": [
                 "K Thanks Bai!",
                 "Chow for now!",
