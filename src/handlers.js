@@ -4,10 +4,10 @@ const location = require('./location');
 const police = require('./police');
 const speech = require('./speech');
 
-const STATES = {
+/*const STATES = {
     NEW: 'NEW',
     MORE_INFO: 'MORE_INFO'
-};
+};*/
 
 function getLocationOptions(system) {
     return {
@@ -30,7 +30,6 @@ function generatePoliceOutput(crimeData) {
 module.exports = {
 
     'LaunchRequest': function() {
-        this.handler.state = STATES.NEW;
         this.emitWithState('VerifyPermission');
     },
 
