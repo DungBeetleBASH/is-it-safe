@@ -1,23 +1,23 @@
 'use strict';
 
 const PostcodesIO = require('postcodesio-client');
-/*const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 const baseUris = {
     uk: 'https://api.eu.amazonalexa.com',
     de: 'https://api.eu.amazonalexa.com',
     us: 'https://api.amazonalexa.com'
-};*/
+};
 const postcodes = new PostcodesIO();
 
 function getCountryAndPostCode(locationOptions, done) {
     // TODO remove temp code
-    return done(null, {
+    /*return done(null, {
         postalCode: 'CF62 7EE'
-    });
+    });*/
 
 
-    /*let url = `${baseUris[locationOptions.locale]}/v1/devices/${locationOptions.deviceId}/settings/address/countryAndPostalCode`;
+    let url = `${baseUris[locationOptions.locale]}/v1/devices/${locationOptions.deviceId}/settings/address/countryAndPostalCode`;
     let options = makeRequestObject(locationOptions.consentToken);
 
     fetch(url, options)
@@ -26,17 +26,17 @@ function getCountryAndPostCode(locationOptions, done) {
         })
         .catch((err) => {
             done(err);
-        });*/
+        });
 }
 
-/*function makeRequestObject(consentToken) {
+function makeRequestObject(consentToken) {
     return {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${consentToken}`
         }
     };
-}*/
+}
 
 function getLocation(deviceAddress, done) {
 
