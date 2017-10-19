@@ -1,6 +1,7 @@
 'use strict';
 const _ = require('lodash');
 const lang = require('./language.json').en.translation;
+const risks = require('./risks.json');
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -10,8 +11,7 @@ module.exports = {
     get: function(key) {
         return lang[key] || '';
     },
-    getRandom: function(key) {
-        let strings = lang[key];
+    getRandom: function(strings) {
         if(!Array.isArray(strings)) {
             return '';
         }
@@ -19,7 +19,7 @@ module.exports = {
     },
     getTotalCrimePrefix: function(data) {
         if (data.total >= 10) {
-            return this.getRandom('EXCLAMATIONS');
+            return this.getRandom(lang['EXCLAMATIONS']);
         }
         return this.get('HMMM');
     },
@@ -42,6 +42,9 @@ module.exports = {
         });
     },
     getFinalResponse: function() {
-        return this.getRandom('FINAL_RESPONSES') + this.getRandom('STOP_MESSAGES');
+        return this.getRandom(lang['FINAL_RESPONSES']) + this.getRandom(lang['STOP_MESSAGES']);
+    },
+    getRisk: function() {
+        return this.getRandom(risks) || '';
     }
 };

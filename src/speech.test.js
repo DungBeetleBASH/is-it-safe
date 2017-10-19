@@ -36,7 +36,7 @@ describe('speech', function() {
 
         it('should return a valid result', function() {
             let expected = lang['EXCLAMATIONS'][2];
-            let actual = speech.getRandom('EXCLAMATIONS');
+            let actual = speech.getRandom(lang['EXCLAMATIONS']);
             assert.equal(expected, actual);
         });
 
