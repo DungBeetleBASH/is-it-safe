@@ -153,21 +153,21 @@ module.exports = {
 
     'PermissionRequired': function() {
         console.log('PermissionRequired');
-        this.attributes.speechOutput = this.t('PERMISSION_MESSAGE');
+        this.attributes.speechOutput = this.t('PERMISSION_MESSAGE') + ' ' + speech.getRandom('STOP_MESSAGES');
         this.attributes.repromptSpeech = this.t('PERMISSION_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
 
     'LocationError': function() {
         console.log('LocationError');
-        this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE');
+        this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE') + ' ' + speech.getRandom('STOP_MESSAGES');
         this.attributes.repromptSpeech = this.t('LOCATION_ERROR_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
 
     'DataError': function() {
-        console.log('LocationError');
-        this.attributes.speechOutput = this.t('DATA_ERROR_MESSAGE');
+        console.log('DataError');
+        this.attributes.speechOutput = this.t('DATA_ERROR_MESSAGE') + ' ' + speech.getRandom('STOP_MESSAGES');
         this.attributes.repromptSpeech = this.t('DATA_ERROR_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
