@@ -1,8 +1,13 @@
 'use strict';
-
+const _ = require('lodash');
 const location = require('./location');
 const police = require('./police');
 const speech = require('./speech');
+
+const STATES = {
+    NEW: 'NEW',
+    MORE_INFO: 'MORE_INFO'
+};
 
 function getLocationOptions(system) {
     return {
@@ -12,8 +17,8 @@ function getLocationOptions(system) {
     };
 }
 
-function hasConsentToken(system) {
-    return !!(system && system.user && system.user.permissions && system.user.permissions.consentToken);
+function hasConsentToken(event) {
+    return _.get(event, 'context.System.user.permissions.consentToken', false);
 }
 
 function generatePoliceOutput(crimeData) {
@@ -25,11 +30,21 @@ function generatePoliceOutput(crimeData) {
 module.exports = {
 
     'LaunchRequest': function() {
+        this.handler.state = STATES.NEW;
         this.emitWithState('VerifyPermission');
     },
 
+    'AMAZON.YesIntent': function() {
+        this.attributes.speechOutput = this.t('MORE_INFO_INTRO');
+        this.emitWithState('Respond');
+    },
+
+    'AMAZON.NoIntent': function() {
+        this.emit('SessionEndedRequest');
+    },
+
     'VerifyPermission': function() {
-        if (!hasConsentToken(this.event.context.System)) {
+        if (!hasConsentToken(this.event)) {
             return this.emitWithState('PermissionRequired');
         }
         this.emitWithState('GetLocationData');

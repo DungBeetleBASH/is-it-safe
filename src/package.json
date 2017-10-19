@@ -10,6 +10,7 @@
   "dependencies": {
     "alexa-sdk": "^1.0.11",
     "aws-sdk": "^2.81.0",
+    "lodash": "^4.17.4",
     "node-fetch": "^1.7.3",
     "postcodesio-client": "^0.2.0"
   }

@@ -23,6 +23,10 @@
     "semi": [
       "error",
       "always"
+    ],
+    "object-shorthand": [
+      "off", 
+      "properties"
     ]
   }
 }
