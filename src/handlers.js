@@ -34,6 +34,8 @@ module.exports = {
     },
 
     'AMAZON.YesIntent': function() {
+        /*eslint no-console: 0*/
+        console.log(JSON.stringify(this.attributes));
         this.attributes.speechOutput = this.t('MORE_INFO_INTRO');
         this.emitWithState('Respond');
     },
