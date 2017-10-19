@@ -10,10 +10,16 @@ module.exports = {
     get: function(key) {
         return lang[key] || '';
     },
+    getRandom: function(key) {
+        let strings = lang[key];
+        if(!Array.isArray(strings)) {
+            return '';
+        }
+        return strings[getRandomInt(0, strings.length)] || ''; 
+    },
     getTotalCrimePrefix: function(data) {
-        let exclamations = lang['EXCLAMATIONS'];
         if (data.total >= 10) {
-            return exclamations[getRandomInt(0, exclamations.length)] || '';
+            return this.getRandom('EXCLAMATIONS');
         }
         return this.get('HMMM');
     },
@@ -34,5 +40,8 @@ module.exports = {
             output += category.replace(/-/g, ' ');
             return output;
         });
+    },
+    getFinalResponse: function() {
+        return this.getRandom('FINAL_RESPONSES') + this.getRandom('STOP_MESSAGES');
     }
 };

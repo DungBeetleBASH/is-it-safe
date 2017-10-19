@@ -37,20 +37,14 @@ module.exports = {
 
     'AMAZON.YesIntent': function() {
         console.log('AMAZON.YesIntent');
-        console.log(JSON.stringify(this.attributes));
-        if (!this.attributes.crimeData) {
-            this.emitWithState('WeirdError');
+        switch (this.attributes.lastState) {
+        case STATES.NEW:
+            return this.emitWithState('MoreInfo');
+        case STATES.MORE_INFO:
+            return this.emitWithState('TooMuchInfo');
+        default:
+            return this.emitWithState('WeirdError');
         }
-        this.attributes.speechOutput = this.t('MORE_INFO_INTRO');
-        let breakdown = speech.getCrimeBreakdown(this.attributes.crimeData);
-        breakdown.forEach(crime => {
-            this.attributes.speechOutput += ' <break time="0.5s"/> ' + crime;
-        });
-        this.attributes.speechOutput += ' <break time="0.5s"/> ';
-        this.attributes.speechOutput += this.t('HEAR_MORE');
-        this.attributes.repromptSpeech = this.t('HEAR_MORE');
-        this.attributes.lastState = STATES.MORE_INFO;
-        this.emitWithState('Respond');
     },
 
     'AMAZON.NoIntent': function() {
@@ -94,6 +88,30 @@ module.exports = {
             this.attributes.lastState = STATES.NEW;
             this.emitWithState('Respond');
         });
+    },
+
+    'MoreInfo': function() {
+        console.log('MoreInfo');
+        console.log(JSON.stringify(this.attributes));
+        if (!this.attributes.crimeData) {
+            this.emitWithState('WeirdError');
+        }
+        this.attributes.speechOutput = this.t('MORE_INFO_INTRO');
+        let breakdown = speech.getCrimeBreakdown(this.attributes.crimeData);
+        breakdown.forEach(crime => {
+            this.attributes.speechOutput += ' <break time="0.5s"/> ' + crime;
+        });
+        this.attributes.speechOutput += ' <break time="0.5s"/> ';
+        this.attributes.speechOutput += this.t('HEAR_MORE');
+        this.attributes.repromptSpeech = this.t('HEAR_MORE');
+        this.attributes.lastState = STATES.MORE_INFO;
+        this.emitWithState('Respond');
+    },
+
+    'TooMuchInfo': function() {
+        console.log('TooMuchInfo');
+        this.attributes.speechOutput = speech.getFinalResponse();
+        this.emitWithState('RespondAndClose');
     },
 
     'AMAZON.HelpIntent': function() {

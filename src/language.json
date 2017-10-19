@@ -9,7 +9,14 @@
             "LOCATION_ERROR_MESSAGE": "Sorry, there was a problem getting the location of your device.",
             "DATA_ERROR_MESSAGE": "Sorry, there was an error getting local crime data.",
             "WEIRD_ERROR": "Sorry, there was some kind of weird error.",
-            "STOP_MESSAGE": "K Thanks. Bye!",
+            "STOP_MESSAGE": "K Thanks Bai!",
+            "STOP_MESSAGES": [
+                "K Thanks Bai!",
+                "Chow for now!",
+                "Arivaderchy",
+                "Roger, Over and out!",
+                "Smell you later."
+            ],
             "MORE_INFO_INTRO": "Oh cool",
             "PERMISSION_MESSAGE": "Oh bummer. You haven't enabled location permissions. I need your post code to give you what you want. You can enable it in you Alexa app on your phone thing.",
             "HMMM": "Hmmm ",
@@ -24,6 +31,14 @@
                 "Strewth! ",
                 "Zoinks! ",
                 "Gordon Bennett! "
+            ],
+            "FINAL_RESPONSES": [
+                "What do you think this is, a choose your own adventure book? There's no more stuff. ",
+                "Oh man. I really can't be bothered. ",
+                "Oh, did I ask if you wanted some more? I don't know why I did that, cos there ain't any more. ",
+                "Haha, tricked you. There's is no more. ",
+                "Urgh. Nope. I can't be bothered. ",
+                "You've been very naughty, so I'm not going to tell you any more. "
             ],
             "TOTAL_CRIME": "There was only 1 crime reported in your area last month. ",
             "TOTAL_CRIMES": "There were {num} crimes reported in your area last month. ",

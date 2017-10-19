@@ -26,6 +26,22 @@ describe('speech', function() {
 
     });
 
+    describe('getRandom', function() {
+        let stubRandom;
+
+        beforeEach(function() {
+            stubRandom = sandbox.stub(Math, 'random');
+            stubRandom.returns(0.23);
+        });
+
+        it('should return a valid result', function() {
+            let expected = lang['EXCLAMATIONS'][2];
+            let actual = speech.getRandom('EXCLAMATIONS');
+            assert.equal(expected, actual);
+        });
+
+    });
+
     describe('getTotalCrimePrefix', function() {
         let stubRandom;
 
@@ -113,6 +129,22 @@ describe('speech', function() {
             ];
             let actual = speech.getCrimeBreakdown(data);
             assert.deepEqual(expected, actual);
+        });
+
+    });
+
+    describe('getFinalResponse', function() {
+        let stubRandom;
+
+        beforeEach(function() {
+            stubRandom = sandbox.stub(Math, 'random');
+            stubRandom.returns(0.1);
+        });
+
+        it('should return a valid result', function() {
+            let expected = lang['FINAL_RESPONSES'][0] + lang['STOP_MESSAGES'][0];
+            let actual = speech.getFinalResponse();
+            assert.equal(expected, actual);
         });
 
     });
