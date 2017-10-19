@@ -1,3 +1,5 @@
+'use strict';
+const _ = require('lodash');
 const lang = require('./language.json').en.translation;
 
 function getRandomInt(min, max) {
@@ -22,6 +24,9 @@ module.exports = {
         return this.get('TOTAL_CRIMES').replace('{num}', String(data.total));
     },
     getCrimeBreakdown: function(data) {
+        if (!_.get(data, 'categories[0]')) {
+            return [this.get('NO_BREAKDOWN')];
+        }
         return data.categories.map(category => {
             let count = data.incidents[category];
             let output = String(count);

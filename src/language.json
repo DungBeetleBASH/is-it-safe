@@ -29,7 +29,8 @@
             "TOTAL_CRIMES": "There were {num} crimes reported in your area last month. ",
             "HEAR_MORE": "You want some more?",
             "WAS": " was ",
-            "WERE": " were "
+            "WERE": " were ",
+            "NO_BREAKDOWN": "Well, like I said. There wasn't any crime in your area last month."
         }
     }
 }

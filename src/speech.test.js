@@ -87,13 +87,16 @@ describe('speech', function() {
 
     describe('getCrimeBreakdown', function() {
 
-        it('should return an empty array', function() {
+        it('should return a default string', function() {
             let data = {
                 categories: [],
                 incidents: {}
             };
+            let expected = [
+                'Well, like I said. There wasn\'t any crime in your area last month.'
+            ];
             let actual = speech.getCrimeBreakdown(data);
-            assert.equal(0, actual.length);
+            assert.deepEqual(expected, actual);
         });
 
         it('should return 2 results', function() {
