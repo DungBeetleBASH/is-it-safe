@@ -49,7 +49,8 @@ module.exports = {
 
     'AMAZON.NoIntent': function() {
         console.log('AMAZON.NoIntent');
-        this.emit('SessionEndedRequest');
+        this.attributes.speechOutput = speech.getRiskMessage() + ' ' + speech.getRandom('STOP_MESSAGES');
+        this.emit('RespondAndClose');
     },
 
     'VerifyPermission': function() {
@@ -81,6 +82,8 @@ module.exports = {
             }
             this.attributes.speechOutput = this.t('LAUNCH_MESSAGE');
             this.attributes.speechOutput += generatePoliceOutput(crimeData);
+            this.attributes.speechOutput += ' <break time="0.5s"/> ';
+            this.attributes.speechOutput += speech.getRiskMessage();
             this.attributes.speechOutput += ' <break time="0.5s"/> ';
             this.attributes.speechOutput += this.t('HEAR_MORE');
             this.attributes.repromptSpeech = this.t('HEAR_MORE');

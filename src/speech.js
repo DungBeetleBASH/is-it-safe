@@ -46,5 +46,8 @@ module.exports = {
     },
     getRisk: function() {
         return this.getRandom(risks) || '';
+    },
+    getRiskMessage: function() {
+        return lang['RISK_MESSAGE'].replace('{risk}', this.getRisk());
     }
 };

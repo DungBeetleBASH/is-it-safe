@@ -44,7 +44,8 @@
             "HEAR_MORE": "You want some more?",
             "WAS": " was ",
             "WERE": " were ",
-            "NO_BREAKDOWN": "Well, like I said. There wasn't any crime in your area last month."
+            "NO_BREAKDOWN": "Well, like I said. There wasn't any crime in your area last month.",
+            "RISK_MESSAGE": "Remember though. {risk} So, take care. "
         }
     }
 }
