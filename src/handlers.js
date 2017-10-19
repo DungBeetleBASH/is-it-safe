@@ -49,7 +49,7 @@ module.exports = {
 
     'AMAZON.NoIntent': function() {
         console.log('AMAZON.NoIntent');
-        this.attributes.speechOutput = speech.getRiskMessage() + ' ' + speech.getRandom('STOP_MESSAGES');
+        this.attributes.speechOutput = speech.getRiskMessage() + ' ' + speech.getStopMessage();
         this.emit('RespondAndClose');
     },
 
@@ -141,7 +141,7 @@ module.exports = {
 
     'SessionEndedRequest': function() {
         console.log('SessionEndedRequest');
-        this.emit(':tell', speech.getRandom('STOP_MESSAGES'));
+        this.emit(':tell', speech.getStopMessage());
     },
 
     'Respond': function() {
@@ -156,28 +156,28 @@ module.exports = {
 
     'PermissionRequired': function() {
         console.log('PermissionRequired');
-        this.attributes.speechOutput = this.t('PERMISSION_MESSAGE') + ' ' + speech.getRandom('STOP_MESSAGES');
+        this.attributes.speechOutput = this.t('PERMISSION_MESSAGE') + ' ' + speech.getStopMessage();
         this.attributes.repromptSpeech = this.t('PERMISSION_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
 
     'LocationError': function() {
         console.log('LocationError');
-        this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE') + ' ' + speech.getRandom('STOP_MESSAGES');
+        this.attributes.speechOutput = this.t('LOCATION_ERROR_MESSAGE') + ' ' + speech.getStopMessage();
         this.attributes.repromptSpeech = this.t('LOCATION_ERROR_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
 
     'DataError': function() {
         console.log('DataError');
-        this.attributes.speechOutput = this.t('DATA_ERROR_MESSAGE') + ' ' + speech.getRandom('STOP_MESSAGES');
+        this.attributes.speechOutput = this.t('DATA_ERROR_MESSAGE') + ' ' + speech.getStopMessage();
         this.attributes.repromptSpeech = this.t('DATA_ERROR_MESSAGE');
         this.emitWithState('RespondAndClose');
     },
 
     'WeirdError': function() {
         console.log('WeirdError');
-        this.attributes.speechOutput = this.t('WEIRD_ERROR') + ' ' + speech.getRandom('STOP_MESSAGES');
+        this.attributes.speechOutput = this.t('WEIRD_ERROR') + ' ' + speech.getStopMessage();
         this.emitWithState('RespondAndClose');
     },
 
