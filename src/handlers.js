@@ -4,10 +4,10 @@ const location = require('./location');
 const police = require('./police');
 const speech = require('./speech');
 
-/*const STATES = {
+const STATES = {
     NEW: 'NEW',
     MORE_INFO: 'MORE_INFO'
-};*/
+};
 
 function getLocationOptions(system) {
     return {
@@ -37,6 +37,14 @@ module.exports = {
         /*eslint no-console: 0*/
         console.log(JSON.stringify(this.attributes));
         this.attributes.speechOutput = this.t('MORE_INFO_INTRO');
+        let breakdown = speech.getCrimeBreakdown(this.attributes.crimeData);
+        breakdown.forEach(crime => {
+            this.attributes.speechOutput += ' <break time="0.5s"/> ' + crime;
+        });
+        this.attributes.speechOutput += ' <break time="0.5s"/> ';
+        this.attributes.speechOutput += this.t('HEAR_MORE');
+        this.attributes.repromptSpeech = this.t('HEAR_MORE');
+        this.attributes.lastState = STATES.MORE_INFO;
         this.emitWithState('Respond');
     },
 
@@ -70,9 +78,11 @@ module.exports = {
             }
             this.attributes.speechOutput = this.t('LAUNCH_MESSAGE');
             this.attributes.speechOutput += generatePoliceOutput(crimeData);
+            this.attributes.speechOutput += ' <break time="0.5s"/> ';
             this.attributes.speechOutput += this.t('HEAR_MORE');
             this.attributes.repromptSpeech = this.t('HEAR_MORE');
             this.attributes.crimeData = crimeData;
+            this.attributes.lastState = STATES.NEW;
             this.emitWithState('Respond');
         });
     },
