@@ -49,7 +49,8 @@ module.exports = {
 
     'AMAZON.NoIntent': function() {
         console.log('AMAZON.NoIntent');
-        this.attributes.speechOutput = speech.getRiskMessage() + ' ' + speech.getStopMessage();
+        this.attributes.speechOutput = speech.getRiskMessage();
+        this.attributes.speechOutput += ' ' + speech.getStopMessage();
         this.emit('RespondAndClose');
     },
 
@@ -104,6 +105,8 @@ module.exports = {
         breakdown.forEach(crime => {
             this.attributes.speechOutput += ' <break time="0.5s"/> ' + crime;
         });
+        this.attributes.speechOutput += ' <break time="0.5s"/> ';
+        this.attributes.speechOutput += speech.getRiskMessage();
         this.attributes.speechOutput += ' <break time="0.5s"/> ';
         this.attributes.speechOutput += this.t('HEAR_MORE');
         this.attributes.repromptSpeech = this.t('HEAR_MORE');
