@@ -8,6 +8,7 @@
             "ERROR_MESSAGE": "Sorry, I didn't understand that request.",
             "LOCATION_ERROR_MESSAGE": "Sorry, there was a problem getting the location of your device.",
             "DATA_ERROR_MESSAGE": "Sorry, there was an error getting local crime data.",
+            "WEIRD_ERROR": "Sorry, there was some kind of weird error.",
             "STOP_MESSAGE": "K Thanks. Bye!",
             "MORE_INFO_INTRO": "Oh cool",
             "PERMISSION_MESSAGE": "Oh bummer. You haven't enabled location permissions. I need your post code to give you what you want. You can enable it in you Alexa app on your phone thing.",

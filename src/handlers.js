@@ -30,12 +30,19 @@ function generatePoliceOutput(crimeData) {
 module.exports = {
 
     'LaunchRequest': function() {
+        // eslint-disable-next-line no-console
+        console.log('LaunchRequest');
         this.emitWithState('VerifyPermission');
     },
 
     'AMAZON.YesIntent': function() {
+        // eslint-disable-next-line no-console
+        console.log('AMAZON.YesIntent');
         /*eslint no-console: 0*/
         console.log(JSON.stringify(this.attributes));
+        if (!this.attributes.crimeData) {
+            this.emitWithState('WeirdError');
+        }
         this.attributes.speechOutput = this.t('MORE_INFO_INTRO');
         let breakdown = speech.getCrimeBreakdown(this.attributes.crimeData);
         breakdown.forEach(crime => {
@@ -49,10 +56,14 @@ module.exports = {
     },
 
     'AMAZON.NoIntent': function() {
+        // eslint-disable-next-line no-console
+        console.log('AMAZON.NoIntent');
         this.emit('SessionEndedRequest');
     },
 
     'VerifyPermission': function() {
+        // eslint-disable-next-line no-console
+        console.log('VerifyPermission');
         if (!hasConsentToken(this.event)) {
             return this.emitWithState('PermissionRequired');
         }
@@ -60,6 +71,8 @@ module.exports = {
     },
 
     'GetLocationData': function() {
+        // eslint-disable-next-line no-console
+        console.log('GetLocationData');
         let options = getLocationOptions(this.event.context.System);
 
         location.get(options, (err, deviceLocation) => {
@@ -72,6 +85,8 @@ module.exports = {
     },
 
     'GetPoliceData': function() {
+        // eslint-disable-next-line no-console
+        console.log('GetPoliceData');
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
             if (err) {
                 return this.emitWithState('DataError');
@@ -88,24 +103,34 @@ module.exports = {
     },
 
     'AMAZON.HelpIntent': function() {
+        // eslint-disable-next-line no-console
+        console.log('AMAZON.HelpIntent');
         this.attributes.speechOutput = this.t('HELP_MESSAGE');
         this.attributes.repromptSpeech = this.t('HELP_REPROMPT');
         this.emitWithState('Respond');
     },
 
     'AMAZON.RepeatIntent': function() {
+        // eslint-disable-next-line no-console
+        console.log('AMAZON.RepeatIntent');
         this.emitWithState('Respond');
     },
 
     'AMAZON.StopIntent': function() {
+        // eslint-disable-next-line no-console
+        console.log('AMAZON.StopIntent');
         this.emit('SessionEndedRequest');
     },
 
     'AMAZON.CancelIntent': function() {
+        // eslint-disable-next-line no-console
+        console.log('AMAZON.CancelIntent');
         this.emit('SessionEndedRequest');
     },
 
     'SessionEndedRequest': function() {
+        // eslint-disable-next-line no-console
+        console.log('SessionEndedRequest');
         this.emit(':tell', this.t('STOP_MESSAGE'));
     },
 
@@ -145,7 +170,16 @@ module.exports = {
         this.emitWithState('RespondAndClose');
     },
 
+    'WeirdError': function() {
+        // eslint-disable-next-line no-console
+        console.log('WeirdError');
+        this.attributes.speechOutput = this.t('WEIRD_ERROR') + ' ' + this.t('STOP_MESSAGE');
+        this.emitWithState('RespondAndClose');
+    },
+
     'Unhandled': function() {
+        // eslint-disable-next-line no-console
+        console.log('Unhandled');
         this.emitWithState('AMAZON.HelpIntent');
     }
 };
