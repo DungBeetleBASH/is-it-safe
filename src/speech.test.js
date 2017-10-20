@@ -76,7 +76,7 @@ describe('speech', function() {
             let data = {
                 total: 1
             };
-            let expected = 'There was only 1 crime reported in your area last month. ';
+            let expected = 'There was only 1 crime reported within a mile of your house last month. ';
             let actual = speech.getTotalCrimeStats(data);
             assert.equal(expected, actual);
         });
@@ -85,7 +85,7 @@ describe('speech', function() {
             let data = {
                 total: 10
             };
-            let expected = 'There were 10 crimes reported in your area last month. ';
+            let expected = 'There were 10 crimes reported within a mile of your house last month. ';
             let actual = speech.getTotalCrimeStats(data);
             assert.equal(expected, actual);
         });
@@ -94,7 +94,7 @@ describe('speech', function() {
             let data = {
                 total: 0
             };
-            let expected = 'There were 0 crimes reported in your area last month. ';
+            let expected = 'There were 0 crimes reported within a mile of your house last month. ';
             let actual = speech.getTotalCrimeStats(data);
             assert.equal(expected, actual);
         });
@@ -109,7 +109,7 @@ describe('speech', function() {
                 incidents: {}
             };
             let expected = [
-                'Well, like I said. There wasn\'t any crime in your area last month.'
+                'Well, like I said. There wasn\'t any crime within a mile of your house last month.'
             ];
             let actual = speech.getCrimeBreakdown(data);
             assert.deepEqual(expected, actual);
