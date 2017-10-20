@@ -39,8 +39,8 @@
                 "Urgh. Nope. I can't be bothered. ",
                 "You've been very naughty, so I'm not going to tell you any more. "
             ],
-            "TOTAL_CRIME": "There was only 1 crime reported in your area last month. ",
-            "TOTAL_CRIMES": "There were {num} crimes reported in your area last month. ",
+            "TOTAL_CRIME": "There was only 1 crime reported within a mile of your house last month. ",
+            "TOTAL_CRIMES": "There were {num} crimes reported within a mile of your house last month. ",
             "HEAR_MORE": "You want some more?",
             "WAS": " was ",
             "WERE": " were ",
