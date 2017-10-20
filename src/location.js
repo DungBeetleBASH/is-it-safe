@@ -21,8 +21,9 @@ function getCountryAndPostCode(locationOptions, done) {
     let options = makeRequestObject(locationOptions.consentToken);
 
     fetch(url, options)
-        .then(res => {
-            done(null, res.json());
+        .then(res => res.json())
+        .then(json => {
+            done(err, json);
         })
         .catch((err) => {
             done(err);
