@@ -55,7 +55,6 @@ module.exports = {
     },
 
     'VerifyPermission': function() {
-        console.log('VerifyPermission');
         if (!hasConsentToken(this.event)) {
             return this.emitWithState('PermissionRequired');
         }
@@ -63,13 +62,11 @@ module.exports = {
     },
 
     'GetLocationData': function() {
-        console.log('GetLocationData');
         let options = getLocationOptions(this.event.context.System);
-        console.log('event.context.System', options);
 
         location.get(options, (err, deviceLocation) => {
-            console.log('deviceLocation', err, deviceLocation);
             if (err) {
+                console.log('LocationError', err, deviceLocation);
                 return this.emitWithState('LocationError');
             }
             this.attributes.deviceLocation = deviceLocation;
@@ -78,7 +75,6 @@ module.exports = {
     },
 
     'GetPoliceData': function() {
-        console.log('GetPoliceData');
         police.getLocalCrime(this.attributes.deviceLocation, (err, crimeData) => {
             if (err) {
                 return this.emitWithState('DataError');

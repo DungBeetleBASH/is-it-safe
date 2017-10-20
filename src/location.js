@@ -1,5 +1,4 @@
 'use strict';
-/*eslint no-console: 0*/
 const PostcodesIO = require('postcodesio-client');
 const fetch = require('node-fetch');
 
@@ -40,7 +39,6 @@ function makeRequestObject(consentToken) {
 }
 
 function getLocation(deviceAddress, done) {
-    console.log('getLocation deviceAddress: ', deviceAddress);
 
     postcodes
         .lookup(deviceAddress.postalCode)
@@ -66,14 +64,11 @@ function getLocation(deviceAddress, done) {
 
 module.exports = {
     get: function(locationOptions, done) {
-        console.log('get', locationOptions);
         getCountryAndPostCode(locationOptions, function (err, deviceAddress) {
-            console.log('getCountryAndPostCode', err, deviceAddress);
             if (err) {
                 return done(err);
             }
             getLocation(deviceAddress, function (err, location) {
-                console.log('getLocation', err, location);
                 if (err) {
                     return done(err);
                 }
