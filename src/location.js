@@ -1,5 +1,5 @@
 'use strict';
-
+/*eslint no-console: 0*/
 const PostcodesIO = require('postcodesio-client');
 const fetch = require('node-fetch');
 
@@ -65,10 +65,12 @@ function getLocation(deviceAddress, done) {
 module.exports = {
     get: function(locationOptions, done) {
         getCountryAndPostCode(locationOptions, function (err, deviceAddress) {
+            console.log('getCountryAndPostCode', err, deviceAddress);
             if (err) {
                 return done(err);
             }
             getLocation(deviceAddress, function (err, location) {
+                console.log('getLocation', err, location);
                 if (err) {
                     return done(err);
                 }

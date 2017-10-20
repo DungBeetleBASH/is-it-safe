@@ -65,8 +65,10 @@ module.exports = {
     'GetLocationData': function() {
         console.log('GetLocationData');
         let options = getLocationOptions(this.event.context.System);
+        console.log('event.context.System', options);
 
         location.get(options, (err, deviceLocation) => {
+            console.log('deviceLocation', err, deviceLocation);
             if (err) {
                 return this.emitWithState('LocationError');
             }
