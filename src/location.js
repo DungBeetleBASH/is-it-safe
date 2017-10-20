@@ -23,7 +23,7 @@ function getCountryAndPostCode(locationOptions, done) {
     fetch(url, options)
         .then(res => res.json())
         .then(json => {
-            done(err, json);
+            done(null, json);
         })
         .catch((err) => {
             done(err);
