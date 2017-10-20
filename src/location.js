@@ -39,6 +39,7 @@ function makeRequestObject(consentToken) {
 }
 
 function getLocation(deviceAddress, done) {
+    console.log('getLocation deviceAddress: ', deviceAddress);
 
     postcodes
         .lookup(deviceAddress.postalCode)
@@ -64,6 +65,7 @@ function getLocation(deviceAddress, done) {
 
 module.exports = {
     get: function(locationOptions, done) {
+        console.log('get', locationOptions);
         getCountryAndPostCode(locationOptions, function (err, deviceAddress) {
             console.log('getCountryAndPostCode', err, deviceAddress);
             if (err) {
